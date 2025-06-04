@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Date Ideas :)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      transition: background 0.5s, color 0.5s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    select, button {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+    }
+    #randomPick {
+      border: 2px solid;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      font-size: 1.1em;
+      text-align: left;
+      width: 100%;
+      font-weight: bold;
+      white-space: pre-line;
+      background: #fff0f8;
+      color: #ff1493;
+    }
+    /* Mood Themes */
+    .sweet {
+      background: #ffe6f0;
+      color: #ff69b4;
+    }
+    .sweet select,
+    .sweet button {
+      background: #fff0f8;
+      color: #ff1493;
+      border: 2px solid #ff69b4;
+    }
+    .sweet #randomPick {
+      background: #fff0f8;
+      border-color: #ff69b4;
+      color: #ff1493;
+    }
+    .chill {
+      background: #e0f7fa;
+      color: #00796b;
+    }
+    .chill select,
+    .chill button {
+      background: #b2ebf2;
+      color: #004d40;
+      border: 2px solid #00796b;
+    }
+    .chill #randomPick {
+      background: #b2ebf2;
+      border-color: #00796b;
+      color: #004d40;
+    }
+    .adventurous {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    .adventurous select,
+    .adventurous button {
+      background: #ffe0b2;
+      color: #bf360c;
+      border: 2px solid #e65100;
+    }
+    .adventurous #randomPick {
+      background: #ffe0b2;
+      border-color: #e65100;
+      color: #bf360c;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+    .car-label {
+      font-size: 0.8em;
+      color: #666;
+      margin-left: 5px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body class="sweet">
+  <h1>🌸 Date Ideas :) 🌸</h1>
+
+  <label for="city">Choose your city:</label>
+  <select id="city" onchange="pickDate()">
+    <option value="PE">Port Elizabeth</option>
+    <option value="PA">Port Alfred</option>
+  </select>
+
+  <label for="length">Choose type of date:</label>
+  <select id="length" onchange="pickDate()">
+    <option value="1">One Activity</option>
+    <option value="3">Half-Day (2–3 Activities)</option>
+    <option value="5">Full-Day (4–5 Activities)</option>
+  </select>
+
+  <label for="mood">Pick a mood:</label>
+  <select id="mood" onchange="setMood(this.value); pickDate()">
+    <option value="sweet">Sweet</option>
+    <option value="chill">Chill</option>
+    <option value="adventurous">Adventurous</option>
+  </select>
+
+  <button onclick="pickDate()">🎲 Pick a Date Plan</button>
+
+  <div id="randomPick">Choose options above and click to get your date idea 💖</div>
+
+  <script>
+    const ideas = {
+      PE: {
+        sweet: [
+          { text: "🎨 Paint each other with blindfolds on", car: false },
+          { text: "🏰 Make a romantic fort and eat snacks inside", car: false },
+          { text: "💃 Teach each other a dance move", car: false },
+          { text: "📓 Create a couple’s scrapbook", car: false },
+          { text: "🕯️ Do a home spa night with candles and masks", car: false },
+          { text: "📦 Make a time capsule and bury it", car: true },
+          { text: "🌇 Take sunset selfies from your roof or garden", car: false },
+          { text: "🧋 Create your own milkshake combos", car: false },
+          { text: "🍪 Decorate cookies like you're on Bake-Off", car: false },
+          { text: "👑 Dress up like each other for laughs", car: false },
+          { text: "🛏️ Build a giant pillow mountain", car: false },
+          { text: "🎤 Do a dramatic reading of song lyrics", car: false },
+          { text: "🧘 Try a YouTube yoga class together", car: false },
+          { text: "🧠 Play 'Would You Rather' with snacks", car: false },
+          { text: "📽️ Rewatch childhood cartoons together", car: false },
+          { text: "📝 Write cheesy poems for each other", car: false },
+          { text: "🪞 DIY chocolate tasting at home", car: false },
+          { text: "🕹️ Play board games with silly rules", car: false },
+          { text: "🎭 Try accents and roleplay scenes", car: false },
+          { text: "🔍 Guess the food blindfolded", car: false },
+          { text: "💌 Write love letters to each other", car: false },
+          { text: "🌙 Stargaze in your backyard with a blanket", car: false },
+          { text: "📚 Read a romantic book aloud", car: false },
+          { text: "🎶 Make a playlist of songs that remind you of each other", car: false },
+          { text: "🌸 Grow a small herb or flower garden together", car: true },
+          { text: "📷 Take silly selfies with cute props", car: false },
+          { text: "🍫 Make homemade chocolates", car: false },
+          { text: "🛁 Take a relaxing bubble bath with candles", car: false },
+          { text: "🌻 Visit a local flower market", car: true },
+          { text: "🖼️ Create art together on a big canvas", car: false },
+          { text: "🎬 Watch a romantic movie marathon", car: false }
+        ],
+        chill: [
+          { text: "☕ Enjoy coffee at a cozy café", car: false },
+          { text: "📖 Visit a local library or bookstore", car: false },
+          { text: "🌿 Walk in the Donkin Reserve", car: false },
+          { text: "🎨 Attend a pottery or craft workshop", car: true },
+          { text: "🍦 Grab ice cream and stroll along the beachfront", car: false },
+          { text: "🎵 Visit a local jazz or acoustic night", car: true },
+          { text: "🛍️ Browse art and craft stalls at weekend markets", car: false },
+          { text: "🌊 Walk the beachfront promenade", car: false },
+          { text: "📸 Go on a photo scavenger hunt around town", car: false },
+          { text: "🧺 Have a sunset picnic at Hobie Beach", car: false },
+          { text: "🎥 Watch indie movies at a small local theater", car: true },
+          { text: "🧩 Solve puzzles or brain games together", car: false },
+          { text: "🚶 Take a calm walk through St George’s Park", car: false },
+          { text: "🌺 Visit the Botanical Gardens", car: true },
+          { text: "🧘 Join a local meditation or yoga group", car: true },
+          { text: "📚 Share your favorite books and discuss", car: false },
+          { text: "🎧 Listen to vinyl records or chill playlists", car: false },
+          { text: "🍵 Have a tea-tasting session at home", car: false },
+          { text: "🌅 Watch the sunrise from a quiet spot", car: false },
+          { text: "📷 Take nature photos at Sardinia Bay", car: true },
+          { text: "🛶 Rent a kayak on the Swartkops River", car: true },
+          { text: "🐦 Birdwatch at Van Stadens River Reserve", car: true },
+          { text: "🧁 Bake cupcakes and decorate them", car: false },
+          { text: "🛋️ Have a cozy movie night with blankets", car: false },
+          { text: "🎨 Sketch or paint portraits of each other", car: false },
+          { text: "📅 Plan future dream dates together", car: false },
+          { text: "🚴 Ride bikes along coastal paths", car: true },
+          { text: "🏞️ Visit nearby nature reserves for gentle hikes", car: true },
+          { text: "🎤 Attend an open mic poetry night", car: true },
+          { text: "🧸 Visit a local market for cute handmade goods", car: false }
+        ],
+        adventurous: [
+          { text: "🚴 Mountain bike at North End Lake trails", car: true },
+          { text: "🐟 Go fishing off the Hobie Beach pier", car: true },
+          { text: "🧗 Try rock climbing at nearby cliffs", car: true },
+          { text: "🏄 Learn surfing or stand-up paddleboarding", car: true },
+          { text: "🦜 Visit a bird sanctuary and hike nearby trails", car: true },
+          { text: "🏕️ Camp overnight at a nature reserve", car: true },
+          { text: "🚤 Take a boat ride on the Swartkops River", car: true },
+          { text: "🏞️ Hike to the top of the Kragga Kamma Game Park hills", car: true },
+          { text: "🛶 Canoe on the Sundays River", car: true },
+          { text: "🏃‍♂️ Try trail running at Seaview", car: true },
+          { text: "🧗‍♀️ Attend an outdoor adventure ropes course", car: true },
+          { text: "🐾 Visit a wildlife sanctuary", car: true },
+          { text: "🏜️ Explore the Addo Elephant National Park", car: true },
+          { text: "🌄 Watch sunrise from a hiking trail", car: true },
+          { text: "🏊‍♂️ Swim in natural rock pools", car: true },
+          { text: "🚣‍♀️ Kayak in local estuaries", car: true },
+          { text: "🐚 Beachcombing for shells and sea glass", car: false },
+          { text: "🎣 Try catch-and-release fishing", car: true },
+          { text: "🛶 Paddle along the salt pans near the coast", car: true },
+          { text: "🚵‍♀️ Take a biking trip through local parks", car: true },
+          { text: "🧭 Plan a day-long adventure hike", car: true },
+          { text: "🧗 Explore caves near the coastline", car: true },
+          { text: "🎒 Go geocaching nearby", car: true },
+          { text: "🏞️ Visit nearby waterfalls and swim", car: true },
+          { text: "🏜️ Go dune boarding", car: true },
+          { text: "🐾 Visit a horse riding stable", car: true },
+          { text: "🎯 Try archery lessons", car: true },
+          { text: "🛶 Explore hidden estuaries by boat", car: true },
+          { text: "🚵‍♂️ Take a coastal mountain bike trail", car: true },
+          { text: "🐠 Snorkeling at shallow beaches", car: true }
+        ]
+      },
+      PA: {
+        sweet: [
+          { text: "📖 Write a short love story together", car: false },
+          { text: "🤝 Invent a silly handshake", car: false },
+          { text: "🧩 Make your own quiz about each other", car: false },
+          { text: "🥷 Do a no-talking challenge", car: false },
+          { text: "🎬 Do a themed movie night", car: false },
+          { text: "🎨 Draw together on a big piece of paper", car: false },
+          { text: "🌸 Paint pebbles and leave them outside", car: false },
+          { text: "🎧 Swap playlists for the day", car: false },
+          { text: "🍳 Film a cooking show while making toast", car: false },
+          { text: "🎁 Create a ‘bucket list jar’", car: false },
+          { text: "🏆 Give each other funny awards", car: false },
+          { text: "📱 Pretend to be tourists in your own town", car: false },
+          { text: "💃 Have a slow dance to cheesy songs", car: false },
+          { text: "🧸 Build a blanket fort", car: false },
+          { text: "🎤 Karaoke silly songs at home", car: false },
+          { text: "📝 Write secret notes and exchange them", car: false },
+          { text: "🍫 Make a chocolate fondue", car: false },
+          { text: "🌙 Stargaze from the balcony", car: false },
+          { text: "🧁 Bake cupcakes and decorate", car: false },
+          { text: "🌹 Exchange handmade flower crowns", car: false },
+          { text: "📚 Read poetry to each other", car: false },
+          { text: "🎯 Play darts or ring toss", car: false },
+          { text: "🎲 Play board games with snacks", car: false },
+          { text: "🎨 Try face painting on each other", car: false },
+          { text: "🎁 Make personalized gifts", car: false },
+          { text: "🎥 Watch home videos", car: false },
+          { text: "🌻 Pick wildflowers and press them", car: true },
+          { text: "💌 Write postcards to each other", car: false },
+          { text: "🎨 Paint ceramics at a studio", car: true },
+          { text: "🍰 Try local bakery treats", car: true }
+        ],
+        chill: [
+          { text: "☕ Enjoy coffee by the Kowie River", car: false },
+          { text: "🛍️ Visit the local craft market", car: false },
+          { text: "🌅 Watch the sunset at the lighthouse", car: true },
+          { text: "🚶 Walk the beachfront promenade", car: false },
+          { text: "📸 Take photos around the town", car: false },
+          { text: "🌿 Visit the Botanical Gardens", car: true },
+          { text: "🧘 Try yoga in the park", car: true },
+          { text: "🧁 Visit local cafés for sweets", car: false },
+          { text: "📚 Visit the local library", car: false },
+          { text: "🎨 Attend an art workshop", car: true },
+          { text: "🎶 Listen to live acoustic music", car: true },
+          { text: "🛶 Canoe on the Kowie River", car: true },
+          { text: "🧺 Have a picnic at a riverside park", car: false },
+          { text: "🌸 Visit local flower shops", car: true },
+          { text: "🍦 Grab ice cream at a local parlor", car: false },
+          { text: "🐦 Birdwatch at Kowie Bird Sanctuary", car: true },
+          { text: "🚴 Ride bikes along coastal paths", car: true },
+          { text: "🚶‍♂️ Walk along the nature trails", car: true },
+          { text: "📖 Read books at a quiet café", car: false },
+          { text: "🎥 Watch indie films at a local theater", car: true },
+          { text: "🍵 Have a tea tasting session", car: false },
+          { text: "📷 Visit local art galleries", car: true },
+          { text: "🛋️ Cozy movie night at home", car: false },
+          { text: "🎭 Attend a local theater play", car: true },
+          { text: "🎤 Attend an open mic night", car: true },
+          { text: "🌞 Walk through the town’s historical sites", car: false },
+          { text: "🛍️ Shop for antiques", car: true },
+          { text: "🌿 Visit a herb garden", car: true },
+          { text: "🍰 Try local bakeries", car: true },
+          { text: "🚣‍♀️ Paddle in the estuary", car: true },
+          { text: "📅 Plan future date adventures together", car: false }
+        ],
+        adventurous: [
+          { text: "🚴 Cycle the local trails", car: true },
+          { text: "🐟 Fish off the piers", car: true },
+          { text: "🏄 Learn surfing or paddleboarding", car: true },
+          { text: "🚤 Take a boat trip on the Kowie River", car: true },
+          { text: "🦜 Visit the Bird Sanctuary and hike nearby", car: true },
+          { text: "🏕️ Camp at nearby nature reserves", car: true },
+          { text: "🧗 Rock climb local cliffs", car: true },
+          { text: "🐾 Visit wildlife parks", car: true },
+          { text: "🏞️ Hike to nearby waterfalls", car: true },
+          { text: "🚣 Kayak in estuaries", car: true },
+          { text: "🏜️ Explore coastal dunes", car: true },
+          { text: "🏊 Swim in natural rock pools", car: true },
+          { text: "🐠 Snorkel shallow coastal waters", car: true },
+          { text: "🎣 Try catch and release fishing", car: true },
+          { text: "🏞️ Take a day hike in nature reserves", car: true },
+          { text: "🐴 Go horse riding", car: true },
+          { text: "🎯 Try archery lessons", car: true },
+          { text: "🚵 Mountain biking on local trails", car: true },
+          { text: "🌄 Watch the sunrise from a hilltop", car: true },
+          { text: "🎒 Go geocaching", car: true },
+          { text: "🐦 Birdwatch at nature reserves", car: true },
+          { text: "🧗‍♀️ Attend outdoor adventure ropes courses", car: true },
+          { text: "🚵‍♀️ Take coastal mountain bike rides", car: true },
+          { text: "🛶 Explore hidden estuaries by boat", car: true },
+          { text: "🏜️ Sand dune boarding", car: true },
+          { text: "🚣 Paddleboarding on calm rivers", car: true },
+          { text: "🌿 Explore nature reserves on foot", car: true },
+          { text: "🐾 Visit animal sanctuaries", car: true },
+          { text: "🏄‍♂️ Try windsurfing", car: true },
+          { text: "🧭 Plan a full-day adventure hike", car: true },
+          { text: "🎣 Night fishing by the river", car: true }
+        ]
+      }
+    };
+
+    function setMood(mood) {
+      document.body.className = mood;
+    }
+
+    function pickDate() {
+      const city = document.getElementById("city").value;
+      const length = Number(document.getElementById("length").value);
+      const mood = document.getElementById("mood").value;
+
+      const availableIdeas = ideas[city][mood];
+
+      // Pick length unique random ideas (or less if not enough)
+      const shuffled = [...availableIdeas].sort(() => 0.5 - Math.random());
+      const chosen = shuffled.slice(0, length);
+
+      // Show ideas with car/no car label
+      let output = `💖 Here are your ${length} ${mood} date ideas for ${city === "PE" ? "Port Elizabeth" : "Port Alfred"}:\n\n`;
+      chosen.forEach((idea, i) => {
+        output += `• ${idea.text} ${idea.car ? "(Car needed)" : "(No car needed)"}\n`;
+      });
+
+      document.getElementById("randomPick").textContent = output;
+    }
+  </script>
+</body>
+</html>
